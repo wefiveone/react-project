@@ -18,7 +18,8 @@
     "eject": "react-scripts eject",
     "format": "prettier --write 'src/**/*.+(js|ts|jsx|tsx)'",
     "lint": "eslint . --ext .js,.ts,.jsx,.tsx --fix --ignore-path .gitignore",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "commit": "cz"
   },
   "eslintConfig": {
     "extends": [
@@ -39,6 +40,8 @@
     ]
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.2.1",
+    "@commitlint/config-conventional": "^19.1.0",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.57.0",
