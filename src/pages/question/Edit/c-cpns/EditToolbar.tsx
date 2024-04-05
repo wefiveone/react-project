@@ -1,12 +1,25 @@
 import React, { FC } from 'react'
 import { Space, Button, Tooltip } from 'antd'
 import { useAppDispatch } from '../../../../store/hooks'
-import { deleteSelectedComponent,changeComponentHidden, toggleComponentLocked } from '../../../../store/componentListReducer'
+import {
+  deleteSelectedComponent,
+  changeComponentHidden,
+  toggleComponentLocked,
+  copySelectedComponent,
+  pasteCopiedComponent
+} from '../../../../store/componentListReducer'
 import useGetComponentInfo from '../../../../hooks/useGetComponentInfo'
-import { DeleteOutlined, EyeInvisibleOutlined, LockOutlined } from '@ant-design/icons'
+import {
+  BlockOutlined,
+  CopyOutlined,
+  DeleteOutlined,
+  EyeInvisibleOutlined,
+  LockOutlined
+} from '@ant-design/icons'
 
 const EditToolbar: FC = () => {
-  const { selectedId, selectedComponent } = useGetComponentInfo()
+  const { selectedId, selectedComponent, copiedComponent } = useGetComponentInfo()
+  console.log(copiedComponent)
   const { isLocked } = selectedComponent || {}
 
   const dispatch = useAppDispatch()
@@ -26,6 +39,15 @@ const EditToolbar: FC = () => {
     dispatch(toggleComponentLocked())
   }
 
+  // 复制组件
+  const handleCopy = () => {
+    dispatch(copySelectedComponent())
+  }
+
+  // 粘贴组件
+  const handlePaste = () => {
+    dispatch(pasteCopiedComponent())
+  }
   return (
     <Space>
       <Tooltip title="删除">
@@ -51,6 +73,22 @@ const EditToolbar: FC = () => {
           onClick={handleLock}
           disabled={selectedId === '' ? true : false}
           type={isLocked ? 'primary' : 'default'}
+        ></Button>
+      </Tooltip>
+      <Tooltip title="复制">
+        <Button
+          shape="circle"
+          icon={<CopyOutlined />}
+          onClick={handleCopy}
+          disabled={selectedId === '' ? true : false}
+        ></Button>
+      </Tooltip>
+      <Tooltip title="粘贴">
+        <Button
+          shape="circle"
+          icon={<BlockOutlined />}
+          onClick={handlePaste}
+          disabled={ copiedComponent === null}
         ></Button>
       </Tooltip>
     </Space>

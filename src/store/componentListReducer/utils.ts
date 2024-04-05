@@ -1,6 +1,6 @@
-import { ComponentInfoType } from ".";
+import type { ComponentInfoType, ComponentListStateType } from ".";
 
-function getNewSelectedId(selectedId: string, componentList: ComponentInfoType[]) {
+export function getNewSelectedId(selectedId: string, componentList: ComponentInfoType[]) {
   const visibleComponentList = componentList.filter(item => item.isHidden === false)
   const index = visibleComponentList.findIndex(item => item.fe_id === selectedId)
   let newSelectedId = ''
@@ -23,4 +23,20 @@ function getNewSelectedId(selectedId: string, componentList: ComponentInfoType[]
   }
 }
 
-export default getNewSelectedId
+/**
+ * @param state 
+ * @param newComponent 新组件 
+ */
+export function insertNewComponent(state: ComponentListStateType, newComponent: ComponentInfoType) {
+  const { selectedId, componentList } = state
+  const index = componentList.findIndex(item => item.fe_id === selectedId)
+  // 未选中组件，则直接插入到componentList最后
+  if (index === -1) {
+    componentList.push(newComponent)
+  } else {
+    // 选中组件，则插入到componentList中选中组件的后面
+    componentList.splice(index + 1, 0, newComponent)
+  }
+  // 更新选中组件id
+  state.selectedId = newComponent.fe_id
+}

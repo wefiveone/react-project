@@ -25,7 +25,7 @@ function useLoadOneQuestionData() {
         selectedId = componentList[0].fe_id
       }
       // 保存到redux中
-      dispatch(resetComponentList({ componentList, selectedId }))
+      dispatch(resetComponentList({ componentList, selectedId, copiedComponent: null }))
     }
   })
 
