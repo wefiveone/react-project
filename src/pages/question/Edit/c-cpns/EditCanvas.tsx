@@ -37,6 +37,7 @@ const EditCanvas: FC<EditCanvasPropsType> = ({ loading }) => {
     dispatch(changeSelectedId(id))
   }
 
+  // 绑定canvas的键盘事件
   useBindCanvasKeyPress()
 
   const ComponentWrapperClassnames = styles['component-wrapper']
