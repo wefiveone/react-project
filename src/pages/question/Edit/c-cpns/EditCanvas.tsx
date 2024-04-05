@@ -36,8 +36,9 @@ const EditCanvas: FC<EditCanvasPropsType> = ({ loading }) => {
     dispatch(changeSelectedId(id))
   }
 
-  const ContentWrapperClassnames = styles['component-wrapper']
+  const ComponentWrapperClassnames = styles['component-wrapper']
   const selectedClassnames = styles['selected']
+  const lockedClassnames = styles['locked']
 
   // 加载中
   if (loading) {
@@ -54,12 +55,13 @@ const EditCanvas: FC<EditCanvasPropsType> = ({ loading }) => {
       {/* 先过滤需要隐藏的组件 */}
       {componentList.filter(item => item.isHidden === false).map((item: ComponentInfoType) => {
         const { fe_id } = item
-        const ContentWrapper = classnames({
-          [ContentWrapperClassnames]: true,
-          [selectedClassnames]: selectedId === fe_id
+        const ComponentWrapper = classnames({
+          [ComponentWrapperClassnames]: true,
+          [selectedClassnames]: selectedId === fe_id,
+          [lockedClassnames]: item.isLocked
         })
         return (
-          <div key={fe_id} className={ContentWrapper} onClick={(e) => handleClick(e, fe_id)}>
+          <div key={fe_id} className={ComponentWrapper} onClick={(e) => handleClick(e, fe_id)}>
             <div className={styles.component}>{generateComponent(item)}</div>
           </div>
         )

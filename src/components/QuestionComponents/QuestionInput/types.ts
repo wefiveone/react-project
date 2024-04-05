@@ -4,6 +4,7 @@
 export interface QuestionInputPropsType {
   title?: string;
   placeholder?: string;
+  disabled?: boolean;
   onChange?: (changeProps: QuestionInputPropsType) => void
 }
 
