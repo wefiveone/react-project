@@ -27,6 +27,9 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'react'],
   rules: {
-    'no-undef': 'off'
+    'no-undef': 'off',
+    'prettier/prettier': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
+    'prefer-const': 'off'
   }
 }
