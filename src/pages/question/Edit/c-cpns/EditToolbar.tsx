@@ -19,7 +19,6 @@ import {
 
 const EditToolbar: FC = () => {
   const { selectedId, selectedComponent, copiedComponent } = useGetComponentInfo()
-  console.log(copiedComponent)
   const { isLocked } = selectedComponent || {}
 
   const dispatch = useAppDispatch()

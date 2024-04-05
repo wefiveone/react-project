@@ -6,6 +6,7 @@ import useGetComponentList from '../../../../hooks/useGetComponentInfo'
 import { changeSelectedId, type ComponentInfoType } from '../../../../store/componentListReducer'
 import { useAppDispatch } from '../../../../store/hooks'
 import { getComponentConfigByType } from '../../../../components/QuestionComponents'
+import useBindCanvasKeyPress from '@/hooks/useBindCanvasKeyPress'
 
 interface EditCanvasPropsType {
   loading?: boolean
@@ -35,6 +36,8 @@ const EditCanvas: FC<EditCanvasPropsType> = ({ loading }) => {
     // 派发action修改redux store中的selectedId
     dispatch(changeSelectedId(id))
   }
+
+  useBindCanvasKeyPress()
 
   const ComponentWrapperClassnames = styles['component-wrapper']
   const selectedClassnames = styles['selected']

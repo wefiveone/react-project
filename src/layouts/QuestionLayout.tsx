@@ -1,8 +1,7 @@
 import React, { FC } from 'react'
 import { Outlet } from 'react-router-dom'
 
-const QuestionLayout: FC = (props) => {
-  console.log('bbb')
+const QuestionLayout: FC = () => {
   return (
     <div style={{height: '100vh'}}>
       <Outlet />

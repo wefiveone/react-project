@@ -22,6 +22,8 @@ const generateComponent = (componentConfig: ComponentConfigType) => {
       fe_id: nanoid(),
       type,
       title,
+      isHidden: false,
+      isLocked: false,
       props: defaultProps,
     }))
   }
