@@ -32,7 +32,7 @@ const INITIAL_STATE: ComponentListStateType = {
 // 异步action creator, 请求一个问卷的组件列表数据
 export const fetchComponentList = createAsyncThunk(
   'componentList/fetchComponentList',
-  async (id: string, { dispatch, getState }) => {
+  async (id: string) => {
     const data = await getOneQuestionData(id)
     const { componentList } = data
     return componentList as ComponentInfoType[]
@@ -131,6 +131,36 @@ const componentListSlice = createSlice({
       copiedComponent.fe_id = nanoid()
       // 插入复制的组件到componentList中
       insertNewComponent(state, copiedComponent)
+    },
+
+    // 选中上一个组件
+    selectPrevComponent(state) {
+      const { selectedId, componentList } = state
+      const index = componentList.findIndex((item) => item.fe_id === selectedId)
+      // 未选中组件
+      if (index === -1) {
+        return
+      } else if (index === 0) {
+        // 选中第一个组件,则selectedId为最后一个组件的fe_id
+        state.selectedId = componentList[componentList.length - 1].fe_id
+      } else {
+        // selectedId为上一个组件的fe_id
+        state.selectedId = componentList[index - 1].fe_id
+      }
+    },
+
+    selectNextComponent(state) {
+      const { selectedId, componentList } = state
+      const index = componentList.findIndex((item) => item.fe_id === selectedId)
+      if (index === -1) {
+        return
+      } else if (index === componentList.length - 1) {
+        // 选中最后一个组件,则selectedId为第一个组件的fe_id
+        state.selectedId = componentList[0].fe_id
+      } else {
+        // selectedId为下一个组件的fe_id
+        state.selectedId = componentList[index + 1].fe_id
+      }
     }
   },
 
@@ -150,6 +180,8 @@ export const {
   changeComponentHidden,
   toggleComponentLocked,
   copySelectedComponent,
-  pasteCopiedComponent
+  pasteCopiedComponent,
+  selectPrevComponent,
+  selectNextComponent
 } = componentListSlice.actions
 export default componentListSlice.reducer
