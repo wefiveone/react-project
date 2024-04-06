@@ -1,13 +1,21 @@
 import type { FC } from 'react'
-import QuestionInputConfig, { QuestionInputPropsType } from './QuestionInput'
-import QuestionTitleConfig, { QuestionTitlePropsType } from './QuestionTitle'
-import QuestionParagraphConfig, { QuestionParagraphPropsType } from './QuestionParagraph'
+import QuestionInputConfig, { type QuestionInputPropsType } from './QuestionInput'
+import QuestionTitleConfig, { type QuestionTitlePropsType } from './QuestionTitle'
+import QuestionParagraphConfig, { type QuestionParagraphPropsType } from './QuestionParagraph'
+import QuestionInfoConfig, { type QuestionInfoPropsType } from './QuestionInfo'
+import QuestionTextareaConfig, { type QuestionTextareaPropsType } from './QuestionTextarea'
+import QuestionRadioConfig, { type QuestionRadioPropsType } from './QuestionRadio'
+import QuestionCheckboxConfig, { type QuestionCheckboxPropsType } from './QuestionCheckbox'
 
 // 各组件props类型
 export type ComponentsPropsType =
   | QuestionInputPropsType
   | QuestionTitlePropsType
   | QuestionParagraphPropsType
+  | QuestionInfoPropsType
+  | QuestionTextareaPropsType
+  | QuestionRadioPropsType
+  | QuestionCheckboxPropsType
 
 // 组件配置类型
 export type ComponentConfigType = {
@@ -28,7 +36,11 @@ export type ComponentConfigGroupType = {
 const componentConfigList: ComponentConfigType[] = [
   QuestionInputConfig,
   QuestionTitleConfig,
-  QuestionParagraphConfig
+  QuestionParagraphConfig,
+  QuestionInfoConfig,
+  QuestionTextareaConfig,
+  QuestionRadioConfig,
+  QuestionCheckboxConfig
 ]
 
 // 组件配置分组数据
@@ -36,12 +48,17 @@ export const componentConfigGroup: ComponentConfigGroupType[] = [
   {
     groupId: 'textGroup',
     groupName: '文本显示',
-    components: [QuestionTitleConfig, QuestionParagraphConfig]
+    components: [QuestionInfoConfig, QuestionTitleConfig, QuestionParagraphConfig]
   },
   {
     groupId: 'inputGroup',
     groupName: '用户输入',
-    components: [QuestionInputConfig]
+    components: [QuestionInputConfig, QuestionTextareaConfig]
+  },
+  {
+    groupId: 'chooseGroup',
+    groupName: '用户选择',
+    components: [QuestionRadioConfig, QuestionCheckboxConfig]
   }
 ]
 
