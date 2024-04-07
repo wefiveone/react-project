@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./userReducer";
 import ComponentListReducer from "./componentListReducer";
+import pageInfoReducer from "./pageInfoReducer";
 
 const store = configureStore({
   reducer: {
     user: userReducer,
-    componentList: ComponentListReducer
+    componentList: ComponentListReducer,
+    pageInfo: pageInfoReducer
   }
 })
 
