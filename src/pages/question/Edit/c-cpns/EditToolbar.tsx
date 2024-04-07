@@ -35,7 +35,7 @@ const EditToolbar: FC = () => {
 
   // 锁定/解锁组件
   const handleLock = () => {
-    dispatch(toggleComponentLocked())
+    dispatch(toggleComponentLocked({ fe_id: selectedId}))
   }
 
   // 复制组件

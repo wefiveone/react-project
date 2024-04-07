@@ -39,7 +39,7 @@ const generateComponent = (componentConfig: ComponentConfigType) => {
 
 const ComponentLib: FC = () => {
   return (
-    <>
+    <div className={styles.componentLib}>
       {componentConfigGroup.map((group, index) => {
         const { groupId, groupName, components } = group
         return (
@@ -51,7 +51,7 @@ const ComponentLib: FC = () => {
           </div>
         )
       })}
-    </>
+    </div>
   )
 }
 

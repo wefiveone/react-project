@@ -3,6 +3,7 @@ import { Tabs } from 'antd'
 import { AppstoreAddOutlined, BarsOutlined } from '@ant-design/icons'
 import styles from './LeftPanel.module.scss'
 import ComponentLib from './ComponentLib'
+import Layers from './Layers'
 
 const LeftPanel: FC = (props) => {
   const tabsItems = [
@@ -24,7 +25,7 @@ const LeftPanel: FC = (props) => {
           图层
         </span>
       ),
-      children: <div>图层</div>
+      children: <Layers />
     }
   ]
 

@@ -1,0 +1,22 @@
+.layers-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 3px;
+  border-bottom: 1px solid rgba($color: #000, $alpha: .06);
+  .title {
+    line-height: 2;
+    cursor: pointer;
+    &:hover {
+      color: rgba($color: #000000, $alpha: 1.0);
+      font-weight: 600;
+    }
+  }
+  .selected {
+    color: #1890ff !important;
+  }
+  .handle {
+    .btn {
+      opacity: .2;
+    }
+  }
+}

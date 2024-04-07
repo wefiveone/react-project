@@ -3,7 +3,7 @@ import { getOneQuestionData } from '@/service/question'
 import { createSlice, createAsyncThunk, nanoid } from '@reduxjs/toolkit'
 import cloneDeep from 'lodash/cloneDeep'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import {  getNewSelectedId, insertNewComponent} from './utils'
+import { getNewSelectedId, insertNewComponent } from './utils'
 
 // 每个组件的信息数据类型
 export interface ComponentInfoType {
@@ -18,7 +18,7 @@ export interface ComponentInfoType {
 // 组件列表数据类型
 export interface ComponentListStateType {
   componentList: ComponentInfoType[]
-  selectedId: string,
+  selectedId: string
   copiedComponent: ComponentInfoType | null
 }
 
@@ -84,7 +84,7 @@ const componentListSlice = createSlice({
     },
 
     // 隐藏/显示组件
-    changeComponentHidden(state, action: PayloadAction<{ fe_id: string, isHidden: boolean }>) {
+    changeComponentHidden(state, action: PayloadAction<{ fe_id: string; isHidden: boolean }>) {
       const { componentList } = state
       const { fe_id, isHidden } = action.payload
       const currentComponent = componentList.find((item) => item.fe_id === fe_id)
@@ -96,7 +96,7 @@ const componentListSlice = createSlice({
         state.selectedId = getNewSelectedId(fe_id, componentList)
       } else {
         // 如果要显示
-        state.selectedId = fe_id 
+        state.selectedId = fe_id
       }
 
       // 隐藏/显示当前选中的组件
@@ -106,9 +106,10 @@ const componentListSlice = createSlice({
     },
 
     // 锁定/解锁组件
-    toggleComponentLocked(state) {
-      const {selectedId, componentList} = state
-      const currentComponent = componentList.find((item) => item.fe_id === selectedId)
+    toggleComponentLocked(state, action: PayloadAction<{ fe_id: string }>) {
+      const { componentList } = state
+      const { fe_id } = action.payload
+      const currentComponent = componentList.find((item) => item.fe_id === fe_id)
       if (currentComponent) {
         currentComponent.isLocked = !currentComponent.isLocked
       }
@@ -119,11 +120,11 @@ const componentListSlice = createSlice({
       const { selectedId, componentList } = state
       const currentComponent = componentList.find((item) => item.fe_id === selectedId)
       if (currentComponent) {
-        // 深拷贝当前选中组件 
+        // 深拷贝当前选中组件
         state.copiedComponent = cloneDeep(currentComponent)
       }
     },
-    
+
     // 粘贴组件
     pasteCopiedComponent(state) {
       const { copiedComponent } = state
@@ -161,6 +162,14 @@ const componentListSlice = createSlice({
         // selectedId为下一个组件的fe_id
         state.selectedId = componentList[index + 1].fe_id
       }
+    },
+
+    changeComponentTitle(state, action: PayloadAction<{ fe_id: string; title: string }>) {
+      const { fe_id, title } = action.payload
+      const currentComponent = state.componentList.find((item) => item.fe_id === fe_id)
+      if (currentComponent) {
+        currentComponent.title = title
+      }
     }
   },
 
@@ -182,6 +191,7 @@ export const {
   copySelectedComponent,
   pasteCopiedComponent,
   selectPrevComponent,
-  selectNextComponent
+  selectNextComponent,
+  changeComponentTitle,
 } = componentListSlice.actions
 export default componentListSlice.reducer
