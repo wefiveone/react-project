@@ -40,7 +40,7 @@ export const fetchComponentList = createAsyncThunk(
   }
 )
 
-const componentListSlice = createSlice({
+const componentsSlice = createSlice({
   name: 'components',
   initialState: INITIAL_STATE,
   reducers: {
@@ -202,5 +202,5 @@ export const {
   selectNextComponent,
   changeComponentTitle,
   moveComponent
-} = componentListSlice.actions
-export default componentListSlice.reducer
+} = componentsSlice.actions
+export default componentsSlice.reducer

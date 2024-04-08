@@ -6,10 +6,13 @@
     "commitlint",
     "cpns",
     "craco",
+    "downarrow",
     "immer",
     "mockjs",
     "Popconfirm",
     "reduxjs",
-    "Rowkeys"
+    "Rowkeys",
+    "undoable",
+    "uparrow"
   ]
 }
