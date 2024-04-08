@@ -3,10 +3,16 @@ import { Spin } from 'antd'
 import classnames from 'classnames'
 import styles from './EditCanvas.module.scss'
 import useGetComponentList from '../../../../hooks/useGetComponentInfo'
-import { changeSelectedId, type ComponentInfoType } from '../../../../store/componentListReducer'
+import {
+  changeSelectedId,
+  moveComponent,
+  type ComponentInfoType
+} from '../../../../store/componentListReducer'
 import { useAppDispatch } from '../../../../store/hooks'
 import { getComponentConfigByType } from '../../../../components/QuestionComponents'
 import useBindCanvasKeyPress from '@/hooks/useBindCanvasKeyPress'
+import SortableContainer from '@/components/DragSortable/SortableContainer'
+import SortableItem from '@/components/DragSortable/SortableItem'
 
 interface EditCanvasPropsType {
   loading?: boolean
@@ -53,23 +59,40 @@ const EditCanvas: FC<EditCanvasPropsType> = ({ loading }) => {
     )
   }
 
+  // 添加id属性，方便拖拽
+  const componentListWithId = componentList.map((item) => ({ ...item, id: item.fe_id }))
+
+  // 拖拽结束事件
+  const handleDragEnd = (oldIndex: number, newIndex: number) => {
+    dispatch(moveComponent({ oldIndex, newIndex }))
+  }
+
   return (
     <div className={styles.canvas}>
       {/* 遍历组件列表，生成对应组件 */}
       {/* 先过滤需要隐藏的组件 */}
-      {componentList.filter(item => item.isHidden === false).map((item: ComponentInfoType) => {
-        const { fe_id } = item
-        const ComponentWrapper = classnames({
-          [ComponentWrapperClassnames]: true,
-          [selectedClassnames]: selectedId === fe_id,
-          [lockedClassnames]: item.isLocked
-        })
-        return (
-          <div key={fe_id} className={ComponentWrapper} onClick={(e) => handleClick(e, fe_id)}>
-            <div className={styles.component}>{generateComponent(item)}</div>
-          </div>
-        )
-      })}
+      <SortableContainer items={componentListWithId} onDragEnd={handleDragEnd}>
+        {componentListWithId
+          .filter((item) => item.isHidden === false)
+          .map((item: ComponentInfoType) => {
+            const { fe_id } = item
+            const ComponentWrapper = classnames({
+              [ComponentWrapperClassnames]: true,
+              [selectedClassnames]: selectedId === fe_id,
+              [lockedClassnames]: item.isLocked
+            })
+            return (
+              <SortableItem id={fe_id} key={fe_id}>
+                <div
+                  className={ComponentWrapper}
+                  onClick={(e) => handleClick(e, fe_id)}
+                >
+                  <div className={styles.component}>{generateComponent(item)}</div>
+                </div>
+              </SortableItem>
+            )
+          })}
+      </SortableContainer>
     </div>
   )
 }

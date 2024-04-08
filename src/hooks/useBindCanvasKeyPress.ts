@@ -2,6 +2,7 @@ import {
   copySelectedComponent,
   deleteSelectedComponent,
   pasteCopiedComponent,
+  selectNextComponent,
   selectPrevComponent
 } from '@/store/componentListReducer'
 import { useAppDispatch } from '@/store/hooks'
@@ -9,7 +10,12 @@ import { useKeyPress } from 'ahooks'
 
 const isActiveElementValid = () => {
   const activeElement = document.activeElement
-  if (activeElement === document.body) return true
+  // 没添加拖拽功能之前
+  // if (activeElement === document.body) return true
+
+  //增加之后
+  if (activeElement.matches('div[role="button"]')) return true
+
   return false
 }
 
@@ -44,7 +50,7 @@ const useBindCanvasKeyPress = () => {
   // 选中下一个
   useKeyPress(['downarrow'], () => {
     if (!isActiveElementValid()) return
-    dispatch(selectPrevComponent())
+    dispatch(selectNextComponent())
   })
 }
 

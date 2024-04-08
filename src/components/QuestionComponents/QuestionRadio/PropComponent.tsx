@@ -7,7 +7,6 @@ const PropComponent: FC<QuestionRadioPropsType> = (props) => {
   const { title, isVertical, options = [], value, onChange, disabled } = props
 
   const handleChange = (_, allValues) => {
-    console.log(allValues)
     // 给options中没值的value添加上值 
     const { options = [] } = allValues
     options.forEach((item, index) => {

@@ -4,6 +4,7 @@ import { createSlice, createAsyncThunk, nanoid } from '@reduxjs/toolkit'
 import cloneDeep from 'lodash/cloneDeep'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { getNewSelectedId, insertNewComponent } from './utils'
+import { arrayMove } from '@dnd-kit/sortable'
 
 // 每个组件的信息数据类型
 export interface ComponentInfoType {
@@ -170,6 +171,13 @@ const componentListSlice = createSlice({
       if (currentComponent) {
         currentComponent.title = title
       }
+    },
+
+    //移动组件列表 
+    moveComponent(state, action: PayloadAction<{ oldIndex: number, newIndex: number }>) {
+      const { componentList } = state
+      const { oldIndex, newIndex } = action.payload
+      state.componentList = arrayMove(componentList, oldIndex, newIndex)
     }
   },
 
@@ -193,5 +201,6 @@ export const {
   selectPrevComponent,
   selectNextComponent,
   changeComponentTitle,
+  moveComponent
 } = componentListSlice.actions
 export default componentListSlice.reducer

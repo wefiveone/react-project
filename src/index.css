@@ -16,3 +16,7 @@ html {
   /* 解决滚动条出现造成页面宽度被挤压问题 */
   margin-right: calc(100% - 100vw);
 }
+
+div[role="button"] {
+  outline: 0;
+}

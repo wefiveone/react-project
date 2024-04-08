@@ -11,21 +11,21 @@ import { addComponentToComponentList } from '../../../../store/componentListRedu
 
 const { Title } = Typography
 
-
-
 const generateComponent = (componentConfig: ComponentConfigType) => {
   const { type, title, Component, defaultProps } = componentConfig
   const dispatch = useAppDispatch()
 
   const handleClick = () => {
-    dispatch(addComponentToComponentList({
-      fe_id: nanoid(),
-      type,
-      title,
-      isHidden: false,
-      isLocked: false,
-      props: defaultProps,
-    }))
+    dispatch(
+      addComponentToComponentList({
+        fe_id: nanoid(),
+        type,
+        title,
+        isHidden: false,
+        isLocked: false,
+        props: defaultProps
+      })
+    )
   }
 
   return (
