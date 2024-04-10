@@ -18,7 +18,7 @@ interface EditCanvasPropsType {
   loading?: boolean
 }
 // 根据服务器返回当前问卷的组件信息，生成对应组件
-const generateComponent = (componentInfo: ComponentInfoType) => {
+export const generateComponent = (componentInfo: ComponentInfoType) => {
   // 获取要生成组件的类型和要传入的props
   const { type, props } = componentInfo
   // 根据组件类型，获取组件配置信息(里面包含该组件)

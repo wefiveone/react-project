@@ -7,13 +7,15 @@ export interface PageInfoType {
   desc?: string
   js?: string
   css?: string
+  isPublished?: boolean
 }
 
 const INITIAL_STATE: PageInfoType = {
   title: '',
   desc: '',
   js: '',
-  css: ''
+  css: '',
+  isPublished: false
 }
 
 const PageInfoReducer = createSlice({

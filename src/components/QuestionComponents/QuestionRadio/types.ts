@@ -13,6 +13,10 @@ export interface QuestionRadioPropsType {
   disabled?: boolean;
 }
 
+export interface QuestionRadioStatPropsType {
+  stat: Array<{name: string; count: number}>
+}
+
 export const QuestionRadioDefaultProps: QuestionRadioPropsType = {
   title: '单选框',
   isVertical: false,

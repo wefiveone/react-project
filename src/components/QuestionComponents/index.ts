@@ -4,8 +4,8 @@ import QuestionTitleConfig, { type QuestionTitlePropsType } from './QuestionTitl
 import QuestionParagraphConfig, { type QuestionParagraphPropsType } from './QuestionParagraph'
 import QuestionInfoConfig, { type QuestionInfoPropsType } from './QuestionInfo'
 import QuestionTextareaConfig, { type QuestionTextareaPropsType } from './QuestionTextarea'
-import QuestionRadioConfig, { type QuestionRadioPropsType } from './QuestionRadio'
-import QuestionCheckboxConfig, { type QuestionCheckboxPropsType } from './QuestionCheckbox'
+import QuestionRadioConfig, { type QuestionRadioStatPropsType, type QuestionRadioPropsType } from './QuestionRadio'
+import QuestionCheckboxConfig, { type QuestionCheckboxPropsType, type QuestionCheckboxStatPropsType } from './QuestionCheckbox'
 
 // 各组件props类型
 export type ComponentsPropsType =
@@ -17,6 +17,9 @@ export type ComponentsPropsType =
   | QuestionRadioPropsType
   | QuestionCheckboxPropsType
 
+// 统计组件props类型
+export type StatComponentPropsType = QuestionRadioStatPropsType | QuestionCheckboxStatPropsType
+
 // 组件配置类型
 export type ComponentConfigType = {
   title: string
@@ -24,6 +27,7 @@ export type ComponentConfigType = {
   Component: FC<ComponentsPropsType>
   PropComponent: FC<ComponentsPropsType>
   defaultProps: ComponentsPropsType
+  StatComponent?: FC<StatComponentPropsType>
 }
 
 export type ComponentConfigGroupType = {

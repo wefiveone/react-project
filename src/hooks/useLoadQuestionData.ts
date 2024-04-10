@@ -19,7 +19,7 @@ function useLoadOneQuestionData() {
   const { loading } = useRequest(fetchQuestionData, {
     refreshDeps: [id],
     onSuccess(data) {
-      const { componentList, title, desc, js, css } = data
+      const { componentList, title, desc, js, css, isPublished } = data
       let selectedId = ''
       // 如果componentList有数据，则默认选中高亮第一个组件border
       if (componentList.length > 0) {
@@ -29,7 +29,7 @@ function useLoadOneQuestionData() {
       dispatch(resetComponentList({ componentList, selectedId, copiedComponent: null }))
 
       // 将pageInfo保存到redux中
-      dispatch(resetPageInfo({ title, desc, js, css }))
+      dispatch(resetPageInfo({ title, desc, js, css, isPublished }))
     }
   })
 

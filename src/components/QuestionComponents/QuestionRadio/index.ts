@@ -1,5 +1,6 @@
 import Component from './Component'
 import PropComponent from './PropComponent'
+import StatComponent from './StatComponent'
 import { QuestionRadioDefaultProps } from './types'
 
 export * from './types'
@@ -9,5 +10,7 @@ export default {
   type: 'questionRadio',
   Component,
   PropComponent,
-  defaultProps: QuestionRadioDefaultProps
+  defaultProps: QuestionRadioDefaultProps,
+  // 统计组件
+  StatComponent
 }

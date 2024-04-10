@@ -10,9 +10,13 @@ module.exports = {
       '@': resolve('src'),
       components: resolve('src/components')
     },
-    configure: (webpackConfig, { env, paths }) => {
-      webpackConfig.resolve.extensions.push('.ts', '.tsx', 'js', '.jsx')
-      return webpackConfig
-    }
+    // 端口不生效？
+    // devServer: whenDev(() => ({
+    //   port: 8000
+    // })),
+    // configure: (webpackConfig, { env, paths }) => {
+    //   // webpackConfig.resolve.extensions.push('.ts', '.tsx', 'js', '.jsx')
+    //   return webpackConfig
+    // }
   }
 }

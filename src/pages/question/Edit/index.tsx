@@ -7,10 +7,16 @@ import { changeSelectedId } from '../../../store/componentListReducer'
 import LeftPanel from './c-cpns/LeftPanel'
 import RightPanel from './c-cpns/RightPanel'
 import EditHeader from './c-cpns/EditHeader'
+import { useTitle } from 'ahooks'
+import useGetPageInfo from '@/hooks/useGetPageInfo'
 
 const Edit: FC = () => {
   const { loading } = useLoadOneQuestionData()
   const dispatch = useAppDispatch()
+
+  // 修改标题
+  const { title } = useGetPageInfo()
+  useTitle(`编辑问卷-${title}`)
 
   const clearSelectedId = () => {
     dispatch(changeSelectedId(''))
