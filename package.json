@@ -23,9 +23,11 @@
     "react-scripts": "5.0.1",
     "recharts": "^2.12.4",
     "redux-undo": "^1.1.0",
+    "source-map-explorer": "^2.5.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
@@ -66,8 +68,7 @@
     "http-proxy-middleware": "^2.0.6",
     "husky": "^8.0.0",
     "prettier": "^3.2.5",
-    "sass": "^1.72.0",
-    "typescript": "^5.4.3"
+    "sass": "^1.72.0"
   },
   "config": {
     "commitizen": {
